@@ -1,6 +1,6 @@
 formulario de creacion de empleado
 <form action="{{url ('/empleado')}}" method="post" enctype="multipart/form-data">
-   @csrf
+@csrf
 
 <label for="Nombre">Nombre</label>
   <input type="text" name="Nombre" id="Nombre">
@@ -9,15 +9,15 @@ formulario de creacion de empleado
   <input type="text" name="ApellidoPaterno" id="ApellidoPaterno">
   <br>
   <label for="ApellidoMaterno">Apellido Materno</label>
-  <input type="text" name="ApelldoMaterno" id="ApelldoMaterno"> 
+  <input type="text" name="ApellidoMaterno" id="ApelldoMaterno"> 
   <br>
   <label for="Correo">Correo</label>
   <input type="text" name="Correo" id="Correo">
   <br>
   <label for="Foto">Foto</label>
-  <input type="file" name="Foto" id="Foto">
+  <input type="file" name="foto" id="foto">
   <br>
-  <input type="submit" name="Enviar">
+  <input type="submit" value="Guardar datos">
   <br>
 
 

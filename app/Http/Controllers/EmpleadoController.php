@@ -15,7 +15,8 @@ class EmpleadoController extends Controller
     public function index()
     {
         //
-        return view('empleado.index');
+        $datos['empleados']=Empleado::paginate(5);
+        return view('empleado.index',$datos);
     }
 
     /**
@@ -39,8 +40,16 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
         //
-        $datosEmpleado=request()->all();
-        return response()-json($datosEmpleado);
+       // $datosEmpleado= request()->all();
+       $datosEmpleado= request()->except('_token');
+
+       
+        if($request->hasfile('foto')){
+            $datosEmpleado['foto']=$request->file('foto')->store('uploads', 'public');
+        }
+
+        Empleado::insert($datosEmpleado);
+        return response()->json($datosEmpleado);
     }
 
     /**
@@ -83,8 +92,11 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empleado $empleado)
+    public function destroy( $id)
     {
         //
+        Empleado::destroy($id);
+        return redirect ('empleado');
+
     }
 }
