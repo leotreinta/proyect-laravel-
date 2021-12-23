@@ -24,3 +24,10 @@ Route::get('/empleado', function () {
 Route::get('/empleado/create',[EmpleadoController::class,'create']);
 */
 Route::resource('empleado', EmpleadoController::class);
+Auth::routes();
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
