@@ -1,63 +1,72 @@
-mostrar la lista de empleados
-<a href="{{url('empleado/create') }}">Registrar un nuevo empleado</a>
+@extends('layouts.app')
 
-@if(Session::has('mensaje'))
-{{Session::get('mensaje')}}
-
-@endif
-
-<table class="table table-light">
-    <thead class="thead-light">
-        <tr>
-            <th>#</th>
-            <th>Foto</th>
-            <th>Nombre</th>
-            <th>Apellido paterno</th>
-            <th>Apellido Materno</th>
-            <th>Correo</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($empleados as $empleado)
-        <tr>
-            <td>{{$empleado->id }}</td>
-
-            <td>
-
-                <img src="{{asset('storage').'/'.$empleado->foto}}"  width="100" alt="">
-              
-            
-            </td>
+@section('content')
+<div class="container">
 
 
-            <td>{{$empleado->Nombre }}</td>
-            <td>{{$empleado->ApellidoPaterno }}</td>
-            <td>{{$empleado->ApellidoMaterno }}</td>
-            <td>{{$empleado->Correo }}</td>
-            <td>
-            <a href="{{url('/empleado/'.$empleado->id.'/edit') }}">
-            Editar 
+    <a href="{{url('empleado/create') }}" class="btn btn-success">Registrar un nuevo empleado</a>
+    <br>
+    <br>
 
-            </a>    
-           
-            
-            
-            
-            
-            
-            │ 
+    @if(Session::has('mensaje'))
+    {{Session::get('mensaje')}}
+
+    @endif
+
+        <table class="table table-light">
+            <thead class="thead-light">
+                <tr>
+                    <th>#</th>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Apellido paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($empleados as $empleado)
+                <tr>
+                    <td>{{$empleado->id }}</td>
+
+                    <td>
+
+                        <img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$empleado->foto}}"  width="100" alt="">
+                    
+                    
+                    </td>
 
 
-            <form action="{{url('/empleado/'.$empleado->id)}}" method="post">
-                @csrf
-                {{method_field('DELETE')}}
-                <input type="submit" onclick="return confirm('¿Quieres borrar?')" value="Borrar">
+                    <td>{{$empleado->Nombre }}</td>
+                    <td>{{$empleado->ApellidoPaterno }}</td>
+                    <td>{{$empleado->ApellidoMaterno }}</td>
+                    <td>{{$empleado->Correo }}</td>
+                    <td>
+                    <a href="{{url('/empleado/'.$empleado->id.'/edit') }}" class="btn btn-warning">
+                    Editar 
 
-            </form>
+                    </a>    
+                
+                    
+                    
+                    
+                    
+                    
+                    │ 
 
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+
+                    <form action="{{url('/empleado/'.$empleado->id)}}" class="d-inline" method="post">
+                        @csrf
+                        {{method_field('DELETE')}}
+                        <input class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar?')" value="Borrar">
+
+                    </form>
+
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+</div>
+@endsection

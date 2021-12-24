@@ -11,23 +11,28 @@ use App\Http\Controllers\EmpleadoController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-
+*/
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
-
+/*
 Route::get('/empleado', function () {
     return view('empleado.index');
 });
 
 Route::get('/empleado/create',[EmpleadoController::class,'create']);
 */
-Route::resource('empleado', EmpleadoController::class);
-Auth::routes();
+Route::resource('empleado', EmpleadoController::class)->middleware('auth');
+
+Auth::routes(['register'=>false,'reset'=>false]);
+
+Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
 
 
+Route::group(['middleware'=> 'auth'],function () {
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [EmpleadoController::class, 'index'])->name('home');
+
+});
